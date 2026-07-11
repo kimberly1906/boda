@@ -165,7 +165,7 @@
         }
 
         .conditional-section {
-            max-height: 2000px;
+            max-height: 3000px;
             opacity: 1;
             transition: all 0.5s ease-in-out;
             overflow: hidden;
@@ -196,6 +196,21 @@
             font-weight: 500;
             font-size: 0.85rem;
             color: #4a4a4a;
+        }
+
+        /* Animación suave para la pregunta del bus */
+        .bus-conditional {
+            max-height: 500px;
+            opacity: 1;
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .bus-conditional.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+            margin-top: 0;
         }
 
         .btn-submit {
@@ -301,19 +316,34 @@
                     </div>
                 </div>
 
+                <!-- ALERGIAS MOVIDAS AQUÍ: JUSTO DEBAJO DE LAS OPCIONES DE MENÚ -->
+                <div class="form-group">
+                    <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas alimentarias</label>
+                    <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: Persona 1 es celíaca, intolerancia a la lactosa..."></textarea>
+                </div>
+
                 <div class="form-group">
                     <label for="bus"><i class="fa-solid fa-bus"></i> Servicio de Autobús</label>
-                    <select id="bus" name="bus">
+                    <select id="bus" name="bus" onchange="evaluarPreguntaBus(this.value)">
                         <option value="No necesito autobús">🚗 No necesito autobús (iré por mi cuenta)</option>
                         <option value="Ida y Vuelta - Alcorcón Central (Salida 17:30)">🚌 Sí, Alcorcón Central (Ida 17:30h / Vuelta 05:15h)</option>
                         <option value="Ida y Vuelta - Moncloa (Salida 18:15)">🚌 Sí, Moncloa (Ida 18:15h / Vuelta 05:15h)</option>
                         <option value="Solo Vuelta (05:15)">🌙 Solo autobús de regreso (05:15h)</option>
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas</label>
-                    <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: Persona 1 es celíaca, necesitamos una trona..."></textarea>
+                    
+                    <!-- PREGUNTA EXTRA DE CUÁNTAS PERSONAS IRÁN EN BUS (Aparece dinámicamente) -->
+                    <div id="bus-plazas-container" class="bus-conditional hidden">
+                        <label for="bus-seats" style="margin-top: 10px; font-size: 0.85rem; color: #4a4a4a;">
+                            <i class="fa-solid fa-ticket"></i> ¿Cuántas plazas necesitáis en el autobús?
+                        </label>
+                        <select id="bus-seats" name="bus-seats">
+                            <option value="1">1 Plaza</option>
+                            <option value="2" selected>2 Plazas</option>
+                            <option value="3">3 Plazas</option>
+                            <option value="4">4 Plazas</option>
+                            <option value="5">5 Plazas</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -350,11 +380,21 @@
         if (willAttend) {
             extraSection.classList.remove('hidden');
             optYes.classList.add('selected-yes');
-            optNo.classList.remove('visited-no');
+            optNo.classList.remove('selected-no');
         } else {
             extraSection.classList.add('hidden');
             optYes.classList.remove('selected-yes');
             optNo.classList.add('selected-no');
+        }
+    }
+
+    // Muestra u oculta la pregunta de las plazas de autobús según la opción elegida
+    function evaluarPreguntaBus(opcionSeleccionada) {
+        const contenedorPlazas = document.getElementById('bus-plazas-container');
+        if (opcionSeleccionada === "No necesito autobús") {
+            contenedorPlazas.classList.add('hidden');
+        } else {
+            contenedorPlazas.classList.remove('hidden');
         }
     }
 
@@ -405,8 +445,16 @@
                 message += ` • Persona ${num}: ${menuElegido}\n`;
             });
             
-            message += `\n🚌 *Autobús:* ${bus}\n`;
-            message += `⚠️ *Alergias/Notas:* ${allergies}\n`;
+            message += `⚠️ *Alergias/Notas:* ${allergies}\n\n`;
+            
+            // Añadir información del autobús y número de plazas si corresponde
+            if (bus === "No necesito autobús") {
+                message += `🚌 *Autobús:* No necesita autobús\n`;
+            } else {
+                const plazasBus = document.getElementById('bus-seats').value;
+                message += `🚌 *Autobús:* ${bus}\n`;
+                message += `🎟️ *Plazas solicitadas:* ${plazasBus} plaza(s)\n`;
+            }
         } else {
             message += `😔 Lamentablemente no podré acompañaros, ¡pero os deseo el mejor de los días! ✨`;
         }
@@ -422,3 +470,4 @@
 
 </body>
 </html>
+

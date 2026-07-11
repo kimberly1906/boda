@@ -52,66 +52,6 @@
             border: 1px solid rgba(242, 162, 188, 0.2);
         }
 
-        .header-illustration {
-            background-color: var(--color-teal);
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .illustration-bg {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: var(--color-pink);
-            border-radius: 50%;
-            opacity: 0.15;
-            top: -50px;
-            right: -30px;
-        }
-        .illustration-bg-2 {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: var(--color-terracotta);
-            border-radius: 50%;
-            opacity: 0.15;
-            bottom: -50px;
-            left: -30px;
-        }
-
-        .header-illustration h1 {
-            font-family: 'Cinzel', serif;
-            color: var(--color-white);
-            font-size: 2.1rem;
-            letter-spacing: 2px;
-            font-weight: 400;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-        }
-
-        .header-illustration .sub-title {
-            font-family: 'Caveat', cursive;
-            color: var(--color-pink);
-            font-size: 2.8rem;
-            margin-top: -10px;
-            transform: rotate(-3deg);
-            display: inline-block;
-        }
-
-        .header-illustration .date-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-white);
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            margin-top: 15px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
         .content {
             padding: 30px 25px;
         }
@@ -238,7 +178,6 @@
             margin-bottom: 0;
         }
 
-        /* Contenedor dinámico de menús por persona */
         .contenedor-menus-dinamicos {
             background-color: #f7f9fa;
             border-left: 4px solid var(--color-teal);
@@ -299,18 +238,13 @@
 <body>
 
 <div class="card">
-    <div class="header-illustration">
-        <div class="illustration-bg"></div>
-        <div class="illustration-bg-2"></div>
-        <h1>Andrés & Kimberly</h1>
-        <div class="sub-title">nos casamos</div>
-        <br>
-        <div class="date-box">
-            <i class="fa-regular fa-calendar-days"></i> 19 de Junio 2027
-        </div>
+    <!-- Imagen de la Invitación Real arriba del todo -->
+    <div style="width: 100%; line-height: 0;">
+        <img src="invitacion.jpg" alt="Invitación Andrés y Kimberly" style="width: 100%; height: auto; display: block;">
     </div>
 
     <div class="content">
+        <!-- Detalles del Evento -->
         <div class="itinerary-info">
             <div class="itinerary-title">
                 <i class="fa-solid fa-location-dot"></i>
@@ -326,6 +260,7 @@
             </div>
         </div>
 
+        <!-- Formulario -->
         <form id="rsvp-form">
             <div class="form-group">
                 <label for="name"><i class="fa-solid fa-user"></i> Nombre Completo / Familia</label>
@@ -346,7 +281,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN CONDICIONAL -->
+            <!-- SECCIÓN CONDICIONAL (MENÚS Y BUS) -->
             <div class="conditional-section" id="extra-info">
                 <div class="form-group">
                     <label for="guests"><i class="fa-solid fa-users"></i> ¿Cuántos vendréis en total?</label>
@@ -359,11 +294,10 @@
                     </select>
                 </div>
 
-                <!-- AQUÍ SE GENERAN LOS MENÚS AUTOMÁTICAMENTE POR PERSONA -->
                 <div class="form-group">
                     <label><i class="fa-solid fa-utensils"></i> Selección de menú por persona:</label>
                     <div id="contenedor-menus" class="contenedor-menus-dinamicos">
-                        <!-- El script meterá las opciones aquí -->
+                        <!-- Se auto-genera con el script de abajo -->
                     </div>
                 </div>
 
@@ -379,8 +313,17 @@
 
                 <div class="form-group">
                     <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas</label>
-                    <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: El invitado 1 es celíaco, el niño quiere trona..."></textarea>
+                    <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: Persona 1 es celíaca, necesitamos una trona..."></textarea>
                 </div>
+            </div>
+
+            <!-- Selector de destino de WhatsApp -->
+            <div class="form-group">
+                <label for="contact-select"><i class="fa-solid fa-paper-plane"></i> ¿A quién envías la confirmación?</label>
+                <select id="contact-select">
+                    <option value="kimberly">A Kimberly 👩‍🦰</option>
+                    <option value="andres">A Andrés 👨</option>
+                </select>
             </div>
 
             <button type="submit" class="btn-submit">
@@ -395,8 +338,9 @@
 </div>
 
 <script>
-    // CAMBIA ESTO POR TU TELÉFONO REAL (Ej: 34675163263)
-    const PAREJA_TELEFONO = "34675163263"; 
+    // ⚠️ CONFIGURA AQUÍ VUESTROS TELÉFONOS REALES (Pon el código de país delante, ej: 34 para España)
+    const TEL_KIMBERLY = "34600000000"; // <-- Reemplaza por el móvil de Kimberly
+    const TEL_ANDRES = "34600000000"; // <-- Reemplaza por el móvil de Andrés
 
     const optYes = document.getElementById('opt-yes');
     const optNo = document.getElementById('opt-no');
@@ -406,7 +350,7 @@
         if (willAttend) {
             extraSection.classList.remove('hidden');
             optYes.classList.add('selected-yes');
-            optNo.classList.remove('selected-no');
+            optNo.classList.remove('visited-no');
         } else {
             extraSection.classList.add('hidden');
             optYes.classList.remove('selected-yes');
@@ -414,15 +358,13 @@
         }
     }
 
-    // Función inteligente que crea tantos menús como personas se elijan
     function generarCamposMenu(numeroPersonas) {
         const contenedor = document.getElementById('contenedor-menus');
-        contenedor.innerHTML = ''; // Limpiar lo anterior
+        contenedor.innerHTML = ''; 
 
         for (let i = 1; i <= numeroPersonas; i++) {
             const div = document.createElement('div');
             div.className = 'subgrupo-menu';
-            
             div.innerHTML = `
                 <label>Menú para Persona ${i}:</label>
                 <select class="menu-persona-select" data-persona="${i}">
@@ -436,10 +378,8 @@
         }
     }
 
-    // Lanzar la función la primera vez para que aparezcan los 2 menús por defecto de inicio
-    generarCamposMenu(2);
+    generarCamposMenu(2); // Empezar con 2 personas por defecto
 
-    // Lógica para enviar por WhatsApp
     document.getElementById('rsvp-form').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -458,7 +398,6 @@
             message += `👥 *Nº de Invitados:* ${guests}\n\n`;
             message += `🍽️ *Elección de Menús:*\n`;
             
-            // Recorrer todos los menús dinámicos seleccionados
             const selectsMenu = document.querySelectorAll('.menu-persona-select');
             selectsMenu.forEach(select => {
                 const num = select.getAttribute('data-persona');
@@ -469,10 +408,14 @@
             message += `\n🚌 *Autobús:* ${bus}\n`;
             message += `⚠️ *Alergias/Notas:* ${allergies}\n`;
         } else {
-            message += `😔 Lamentablemente no podré acompañaros en vuestro gran día, ¡pero os deseo todo lo mejor! ✨`;
+            message += `😔 Lamentablemente no podré acompañaros, ¡pero os deseo el mejor de los días! ✨`;
         }
 
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${PAREJA_TELEFONO}&text=${encodeURIComponent(message)}`;
+        // Lógica para elegir destino de WhatsApp
+        const destino = document.getElementById('contact-select').value;
+        const telefonoDestino = (destino === "kimberly") ? TEL_KIMBERLY : TEL_ANDRES;
+
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${telefonoDestino}&text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     });
 </script>

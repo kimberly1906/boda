@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés & Kimberly - RSVP Boda</title>
+    
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Caveat:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos elegantes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Paleta de colores oficial basada en la invitación */
+        :root {
+            --color-teal: #0b5a75; /* Azul petróleo de fondo */
+            --color-pink: #f2a2bc; /* Rosa de "nos casamos" */
+            --color-dark: #1d1516; /* Marrón oscuro/chocolate del traje */
+            --color-terracotta: #b3644f; /* Tono de piel/tierra elegante */
+            --color-cream: #faf6f0; /* Fondo de la web suave */
+            --color-white: #ffffff;
+            --color-gray: #7a7575;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-cream);
+            color: var(--color-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        /* Contenedor principal estilo Tarjeta Elegant */
+        .card {
+            background-color: var(--color-white);
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(29, 21, 22, 0.08);
+            max-width: 550px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(242, 162, 188, 0.2);
+        }
+
+        /* Cabecera Artística imitando la ilustración de la boda */
+        .header-illustration {
+            background-color: var(--color-teal);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Círculos flotantes decorativos simulando las cabezas y curvas de la invitación */
+        .illustration-bg {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--color-pink);
+            border-radius: 50%;
+            opacity: 0.15;
+            top: -50px;
+            right: -30px;
+        }
+        .illustration-bg-2 {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--color-terracotta);
+            border-radius: 50%;
+            opacity: 0.15;
+            bottom: -50px;
+            left: -30px;
+        }
+
+        .header-illustration h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--color-white);
+            font-size: 2.1rem;
+            letter-spacing: 2px;
+            font-weight: 400;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .header-illustration .sub-title {
+            font-family: 'Caveat', cursive;
+            color: var(--color-pink);
+            font-size: 2.8rem;
+            margin-top: -10px;
+            transform: rotate(-3deg);
+            display: inline-block;
+        }
+
+        .header-illustration .date-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-top: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Cuerpo del contenido */
+        .content {
+            padding: 30px 25px;
+        }
+
+        /* Bloque informativo de Itinerario */
+        .itinerary-info {
+            background-color: #fcfbfa;
+            border: 1px solid #eae6e1;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .itinerary-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--color-teal);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            align-items: flex-start;
+        }
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .itinerary-time {
+            font-weight: 600;
+            color: var(--color-terracotta);
+            min-width: 75px;
+        }
+
+        /* Formulario Estilizado */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--color-dark);
+        }
+
+        .form-group label i {
+            color: var(--color-teal);
+            margin-right: 6px;
+        }
+
+        /* Inputs y Textareas */
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1dbd6;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--color-dark);
+            background-color: var(--color-white);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--color-teal);
+            outline: none;
+            box-shadow: 0 0 8px rgba(11, 90, 117, 0.15);
+        }
+
+        /* Opciones de asistencia elegantes */
+        .assistance-toggle {
+            display: flex;
+            gap: 15px;
+        }
+
+        .assistance-option {
+            flex: 1;
+            border: 2px solid #e1dbd6;
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .assistance-option input {
+            display: none;
+        }
+
+        .assistance-option span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .assistance-option.selected-yes {
+            border-color: var(--color-teal);
+            background-color: rgba(11, 90, 117, 0.05);
+            color: var(--color-teal);
+        }
+
+        .assistance-option.selected-no {
+            border-color: var(--color-pink);
+            background-color: rgba(242, 162, 188, 0.05);
+            color: #d1567d;
+        }
+
+        /* Sección Condicional Animada */
+        .conditional-section {
+            max-height: 1000px;
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .conditional-section.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+            margin-bottom: 0;
+        }
+
+        /* Botón de envío elegante */
+        .btn-submit {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(11, 90, 117, 0.2);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(29, 21, 22, 0.25);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        /* Pie de página */
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: var(--color-gray);
+        }
+
+        .footer-note i {
+            color: var(--color-pink);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- Cabecera inspirada en vuestra Invitación -->
+    <div class="header-illustration">
+        <div class="illustration-bg"></div>
+        <div class="illustration-bg-2"></div>
+        <h1>Andrés & Kimberly</h1>
+        <div class="sub-title">nos casamos</div>
+        <br>
+        <div class="date-box">
+            <i class="fa-regular fa-calendar-days"></i> 19 de Junio 2027
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Detalles del Evento -->
+        <div class="itinerary-info">
+            <div class="itinerary-title">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Ceremonia & Banquete</span>
+            </div>
+            <div class="itinerary-item">
+                <span class="itinerary-time">19:00 h</span>
+                <span>Llegada de invitados</span>
+            </div>
+            <div class="itinerary-item">
+                <span class="itinerary-time">19:30 h</span>
+                <span>Ceremonia en El Fogón de la Casona (Valdemorillo, Madrid)</span>
+            </div>
+        </div>
+
+        <!-- Formulario RSVP -->
+        <form id="rsvp-form">
+            <!-- Nombre -->
+            <div class="form-group">
+                <label for="name"><i class="fa-solid fa-user"></i> Nombre Completo</label>
+                <input type="text" id="name" name="name" placeholder="Ej: Juan Pérez y Familia" required>
+            </div>
+
+            <!-- Asistencia -->
+            <div class="form-group">
+                <label><i class="fa-solid fa-envelope-open-text"></i> ¿Podrás acompañarnos?</label>
+                <div class="assistance-toggle">
+                    <label class="assistance-option selected-yes" id="opt-yes">
+                        <input type="radio" name="attendance" value="Sí, asistiré" checked onclick="toggleSection(true)">
+                        <span>¡Sí, asistiré!  </span>
+                    </label>
+                    <label class="assistance-option" id="opt-no">
+                        <input type="radio" name="attendance" value="No podré asistir" onclick="toggleSection(false)">
+                        <span>No podré asistir  </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SECCIÓN CONDICIONAL (Se oculta si no asiste) -->
+            <div class="conditional-section" id="extra-info">
+                <!-- Pases/Acompañantes -->
+                <div class="form-group">
+                    <label for="guests"><i class="fa-solid fa-users"></i> Número de Personas</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 Persona</option>
+                        <option value="2" selected>2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="Más de 4">Más de 4 (especificar en notas)</option>
+                    </select>
+                </div>
+
+                <!-- Selección de Menú -->
+                <div class="form-group">
+                    <label for="menu"><i class="fa-solid fa-utensils"></i> Preferencia de Menú</label>
+                    <select id="menu" name="menu">
+                        <option value="Menú de Carne">  Menú de Carne</option>
+                        <option value="Menú de Pescado">  Menú de Pescado</option>
+                        <option value="Menú Vegetariano">  Menú Vegetariano / Vegano</option>
+                        <option value="Menú Infantil">  Menú Infantil</option>
+                        <option value="Varios menús (detallar abajo)">  Combinación (Detallar en notas)</option>
+                    </select>
+                </div>
+
+                <!-- Transporte (Autobús) -->
+                <div class="form-group">
+                    <label for="bus"><i class="fa-solid fa-bus"></i> Servicio de Autobús</label>
+                    <select id="bus" name="bus">
+                        <option value="No necesito autobús">  No necesito autobús (iré por mi cuenta)</option>
+                        <option value="Ida y Vuelta - Alcorcón Central (Salida 17:30)">  Sí, Alcorcón Central (Ida 17:30h / Vuelta 05:15h)</option>
+                        <option value="Ida y Vuelta - Moncloa (Salida 18:15)">  Sí, Moncloa (Ida 18:15h / Vuelta 05:15h)</option>
+                        <option value="Solo Vuelta (05:15)">  Solo autobús de regreso (05:15h)</option>
+                    </select>
+                </div>
+
+                <!-- Alergias / Observaciones -->
+                <div class="form-group">
+                    <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas</label>
+                    <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: 1 Celíaco, 1 vegetariano, alergia a las nueces..."></textarea>
+                </div>
+            </div>
+
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn-submit">
+                <i class="fa-brands fa-whatsapp"></i> Enviar Confirmación por WhatsApp
+            </button>
+        </form>
+
+        <div class="footer-note">
+            Hecho con <i class="fa-solid fa-heart"></i> para Andrés & Kimberly.
+        </div>
+    </div>
+</div>
+
+<script>
+    // Tu número de teléfono para recibir los RSVP por WhatsApp (pon tu código de país primero, ej: 34 para España)
+    const PAREJA_TELEFONO = "34675163263"; // Reemplaza esto con tu móvil real sin el símbolo "+"
+
+    // Función interactiva para cambiar la decoración de botones de selección
+    const optYes = document.getElementById('opt-yes');
+    const optNo = document.getElementById('opt-no');
+
+    function toggleSection(willAttend) {
+        const extraSection = document.getElementById('extra-info');
+        if (willAttend) {
+            extraSection.classList.remove('hidden');
+            optYes.classList.add('selected-yes');
+            optNo.classList.remove('selected-no');
+        } else {
+            extraSection.classList.add('hidden');
+            optYes.classList.remove('selected-yes');
+            optNo.classList.add('selected-no');
+        }
+    }
+
+    // Lógica mágica para recolectar datos y mandar por WhatsApp sin servidores
+    document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const attendance = document.querySelector('input[name="attendance"]:checked').value;
+        
+        let message = `  *RSVP BODA: Andrés & Kimberly*  \n\n`;
+        message += `  *Nombre:* ${name}\n`;
+        message += `  *Asistencia:* ${attendance}\n`;
+
+        if (attendance === "Sí, asistiré") {
+            const guests = document.getElementById('guests').value;
+            const menu = document.getElementById('menu').value;
+            const bus = document.getElementById('bus').value;
+            const allergies = document.getElementById('allergies').value || "Ninguna";
+
+            message += `  *Nº de Invitados:* ${guests}\n`;
+            message += `  *Preferencia de Menú:* ${menu}\n`;
+            message += `  *Servicio de Autobús:* ${bus}\n`;
+            message += `  *Alergias/Notas:* ${allergies}\n`;
+        } else {
+            message += `  Lamentablemente no podré acompañaros en vuestro gran día, ¡pero os deseo lo mejor!  `;
+        }
+
+        // Codificar el texto para que sea compatible con un enlace web
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${PAREJA_TELEFONO}&text=${encodeURIComponent(message)}`;
+        
+        // Redirigir directamente al chat de WhatsApp
+        window.open(whatsappUrl, '_blank');
+    });
+</script>
+
+</body>
+</html>

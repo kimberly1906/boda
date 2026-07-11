@@ -198,7 +198,7 @@
             color: #4a4a4a;
         }
 
-        /* Animación suave para la pregunta del bus */
+        /* Bloque condicional animado para las plazas */
         .bus-conditional {
             max-height: 500px;
             opacity: 1;
@@ -316,7 +316,7 @@
                     </div>
                 </div>
 
-                <!-- ALERGIAS MOVIDAS AQUÍ: JUSTO DEBAJO DE LAS OPCIONES DE MENÚ -->
+                <!-- ALERGIAS DEBAJO DE LOS MENÚS -->
                 <div class="form-group">
                     <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas alimentarias</label>
                     <textarea id="allergies" name="allergies" rows="2" placeholder="Ej: Persona 1 es celíaca, intolerancia a la lactosa..."></textarea>
@@ -331,7 +331,7 @@
                         <option value="Solo Vuelta (05:15)">🌙 Solo autobús de regreso (05:15h)</option>
                     </select>
                     
-                    <!-- PREGUNTA EXTRA DE CUÁNTAS PERSONAS IRÁN EN BUS (Aparece dinámicamente) -->
+                    <!-- PREGUNTA DE CUÁNTAS PERSONAS POR BUS -->
                     <div id="bus-plazas-container" class="bus-conditional hidden">
                         <label for="bus-seats" style="margin-top: 10px; font-size: 0.85rem; color: #4a4a4a;">
                             <i class="fa-solid fa-ticket"></i> ¿Cuántas plazas necesitáis en el autobús?
@@ -369,8 +369,8 @@
 
 <script>
     // ⚠️ CONFIGURA AQUÍ VUESTROS TELÉFONOS REALES (Pon el código de país delante, ej: 34 para España)
-    const TEL_KIMBERLY = "34675163263"; // <-- Reemplaza por el móvil de Kimberly
-    const TEL_ANDRES = "34679793713"; // <-- Reemplaza por el móvil de Andrés
+    const TEL_KIMBERLY = "34600000000"; // <-- Reemplaza por el móvil de Kimberly
+    const TEL_ANDRES = "34600000000"; // <-- Reemplaza por el móvil de Andrés
 
     const optYes = document.getElementById('opt-yes');
     const optNo = document.getElementById('opt-no');
@@ -388,7 +388,7 @@
         }
     }
 
-    // Muestra u oculta la pregunta de las plazas de autobús según la opción elegida
+    // Muestra u oculta de verdad la opción de plazas por bus
     function evaluarPreguntaBus(opcionSeleccionada) {
         const contenedorPlazas = document.getElementById('bus-plazas-container');
         if (opcionSeleccionada === "No necesito autobús") {
@@ -447,7 +447,6 @@
             
             message += `⚠️ *Alergias/Notas:* ${allergies}\n\n`;
             
-            // Añadir información del autobús y número de plazas si corresponde
             if (bus === "No necesito autobús") {
                 message += `🚌 *Autobús:* No necesita autobús\n`;
             } else {
@@ -459,7 +458,6 @@
             message += `😔 Lamentablemente no podré acompañaros, ¡pero os deseo el mejor de los días! ✨`;
         }
 
-        // Lógica para elegir destino de WhatsApp
         const destino = document.getElementById('contact-select').value;
         const telefonoDestino = (destino === "kimberly") ? TEL_KIMBERLY : TEL_ANDRES;
 
@@ -470,4 +468,3 @@
 
 </body>
 </html>
-

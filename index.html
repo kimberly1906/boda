@@ -4,83 +4,283 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrés & Kimberly - RSVP Boda</title>
+    
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Caveat:wght@600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos elegantes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        :root { --color-teal: #0b5a75; --color-pink: #f2a2bc; --color-dark: #1d1516; --color-terracotta: #b3644f; --color-cream: #faf6f0; --color-white: #ffffff; --color-gray: #7a7575; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--color-cream); color: var(--color-dark); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px 10px; }
-        .card { background-color: var(--color-white); border-radius: 24px; box-shadow: 0 15px 40px rgba(29, 21, 22, 0.08); max-width: 550px; width: 100%; overflow: hidden; border: 1px solid rgba(242, 162, 188, 0.2); }
-        .content { padding: 30px 25px; }
-        .itinerary-info { background-color: #fcfbfa; border: 1px solid #eae6e1; border-radius: 16px; padding: 20px; margin-bottom: 25px; }
-        .itinerary-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--color-teal); margin-bottom: 12px; font-weight: bold; }
-        .form-group { margin-bottom: 22px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: var(--color-dark); }
-        input[type="text"], select, textarea { width: 100%; padding: 12px 16px; border: 2px solid #e1dbd6; border-radius: 12px; font-family: 'Montserrat', sans-serif; }
-        .assistance-toggle { display: flex; gap: 15px; }
-        .assistance-option { flex: 1; border: 2px solid #e1dbd6; border-radius: 12px; padding: 14px; text-align: center; cursor: pointer; }
-        .assistance-option input { display: none; }
-        .assistance-option.selected-yes { border-color: var(--color-teal); background-color: rgba(11, 90, 117, 0.05); color: var(--color-teal); }
-        .assistance-option.selected-no { border-color: var(--color-pink); background-color: rgba(242, 162, 188, 0.05); color: #d1567d; }
-        .conditional-section { max-height: 3000px; opacity: 1; transition: all 0.5s ease-in-out; }
-        .conditional-section.hidden { max-height: 0; opacity: 0; pointer-events: none; }
-        .contenedor-menus-dinamicos { background-color: #f7f9fa; border-left: 4px solid var(--color-teal); padding: 15px; border-radius: 0 12px 12px 0; }
-        .btn-submit { background-color: var(--color-teal); color: var(--color-white); border: none; border-radius: 12px; width: 100%; padding: 16px; font-weight: 600; cursor: pointer; margin-top: 15px; }
-        .footer-note { text-align: center; margin-top: 25px; font-size: 0.8rem; color: var(--color-gray); }
+        :root {
+            --color-teal: #0b5a75;       
+            --color-pink: #f2a2bc;       
+            --color-dark: #1d1516;       
+            --color-terracotta: #b3644f; 
+            --color-cream: #faf6f0;      
+            --color-white: #ffffff;
+            --color-gray: #7a7575;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-cream);
+            color: var(--color-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border-radius: 24px;
+            box-shadow: 0 15px 40px rgba(29, 21, 22, 0.08);
+            max-width: 550px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(242, 162, 188, 0.2);
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        .itinerary-info {
+            background-color: #fcfbfa;
+            border: 1px solid #eae6e1;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .itinerary-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--color-teal);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--color-dark);
+        }
+
+        .form-group label i {
+            color: var(--color-teal);
+            margin-right: 6px;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1dbd6;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: var(--color-dark);
+            background-color: var(--color-white);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: var(--color-teal);
+            outline: none;
+            box-shadow: 0 0 8px rgba(11, 90, 117, 0.15);
+        }
+
+        .assistance-toggle {
+            display: flex;
+            gap: 15px;
+        }
+
+        .assistance-option {
+            flex: 1;
+            border: 2px solid #e1dbd6;
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .assistance-option input {
+            display: none;
+        }
+
+        .assistance-option span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .assistance-option.selected-yes {
+            border-color: var(--color-teal);
+            background-color: rgba(11, 90, 117, 0.05);
+            color: var(--color-teal);
+        }
+
+        .assistance-option.selected-no {
+            border-color: var(--color-pink);
+            background-color: rgba(242, 162, 188, 0.05);
+            color: #d1567d;
+        }
+
+        .conditional-section {
+            max-height: 3000px;
+            opacity: 1;
+            transition: all 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .conditional-section.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+            margin-bottom: 0;
+        }
+
+        .contenedor-menus-dinamicos {
+            background-color: #f7f9fa;
+            border-left: 4px solid var(--color-teal);
+            padding: 15px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 22px;
+        }
+
+        .btn-submit {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(11, 90, 117, 0.2);
+            margin-top: 15px;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(29, 21, 22, 0.25);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: var(--color-gray);
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div style="width: 100%; line-height: 0;"><img src="invitacion.jpg" alt="Invitación" style="width: 100%; height: auto;"></div>
+    <div style="width: 100%; line-height: 0;">
+        <img src="invitacion.jpg" alt="Invitación Andrés y Kimberly" style="width: 100%; height: auto; display: block;">
+    </div>
+
     <div class="content">
         <div class="itinerary-info">
-            <div class="itinerary-title"><i class="fa-solid fa-location-dot"></i> Ceremonia & Banquete</div>
-            <p>19:00 h Llegada<br>19:30 h Ceremonia en El Fogón de la Casona</p>
+            <div class="itinerary-title">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Ceremonia & Banquete</span>
+            </div>
+            <p style="font-size: 0.95rem;">19:00 h - Llegada de invitados<br>19:30 h - Ceremonia en El Fogón de la Casona (Valdemorillo, Madrid)</p>
         </div>
 
         <form id="rsvp-form">
             <div class="form-group">
-                <label><i class="fa-solid fa-user"></i> Nombre</label>
-                <input type="text" id="name" required placeholder="Nombre y Apellidos">
+                <label for="name"><i class="fa-solid fa-user"></i> Nombre Completo / Familia</label>
+                <input type="text" id="name" placeholder="Ej: Juan Pérez y Ana Gómez" required>
             </div>
 
             <div class="form-group">
-                <label>¿Podrás asistir?</label>
+                <label><i class="fa-solid fa-envelope-open-text"></i> ¿Podrás acompañarnos?</label>
                 <div class="assistance-toggle">
-                    <label class="assistance-option selected-yes" id="opt-yes"><input type="radio" name="attendance" value="Sí" checked onclick="toggleSection(true)"> Sí 🎉</label>
-                    <label class="assistance-option" id="opt-no"><input type="radio" name="attendance" value="No" onclick="toggleSection(false)"> No 😔</label>
+                    <label class="assistance-option selected-yes" id="opt-yes">
+                        <input type="radio" name="attendance" value="Sí, asistiré" checked onclick="toggleSection(true)">
+                        <span>¡Sí, asistiré! 🎉</span>
+                    </label>
+                    <label class="assistance-option" id="opt-no">
+                        <input type="radio" name="attendance" value="No podré asistir" onclick="toggleSection(false)">
+                        <span>No podré asistir 😔</span>
+                    </label>
                 </div>
             </div>
 
             <div class="conditional-section" id="extra-info">
                 <div class="form-group">
-                    <label>¿Cuántos seréis?</label>
+                    <label for="guests"><i class="fa-solid fa-users"></i> ¿Cuántos vendréis en total?</label>
                     <select id="guests" onchange="generarCamposMenu(this.value)">
-                        <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+                        <option value="1">1 Persona</option>
+                        <option value="2" selected>2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                        <option value="5">5 Personas</option>
                     </select>
                 </div>
+
                 <div class="form-group">
-                    <label>Menú:</label>
-                    <div id="contenedor-menus" class="contenedor-menus-dinamicos"></div>
+                    <label><i class="fa-solid fa-utensils"></i> Selección de menú por persona:</label>
+                    <div id="contenedor-menus" class="contenedor-menus-dinamicos">
+                        <!-- Se genera dinámicamente con las 4 opciones -->
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label>Alergias / Notas</label>
-                    <textarea id="allergies" rows="2"></textarea>
+                    <label for="allergies"><i class="fa-solid fa-circle-exclamation"></i> Alergias, intolerancias o notas alimentarias</label>
+                    <textarea id="allergies" rows="2" placeholder="Ej: Persona 1 es celíaca, intolerancia a la lactosa..."></textarea>
                 </div>
+
                 <div class="form-group">
-                    <label>Autobús</label>
+                    <label for="bus"><i class="fa-solid fa-bus"></i> Servicio de Autobús</label>
                     <select id="bus">
-                        <option value="No necesito">No necesito autobús</option>
-                        <option value="Alcorcón">Alcorcón (17:30)</option>
-                        <option value="Moncloa">Moncloa (18:15)</option>
+                        <option value="No necesito autobús">🚗 No necesito autobús (iré por mi cuenta)</option>
+                        <option value="Ida y Vuelta - Alcorcón Central (Salida 17:30)">🚌 Sí, Alcorcón Central (Ida 17:30h / Vuelta 05:15h)</option>
+                        <option value="Ida y Vuelta - Moncloa (Salida 18:15)">🚌 Sí, Moncloa (Ida 18:15h / Vuelta 05:15h)</option>
+                        <option value="Solo Vuelta (05:15)">🌙 Solo autobús de regreso (05:15h)</option>
                     </select>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit">Enviar Confirmación</button>
+            <button type="submit" class="btn-submit">
+                <i class="fa-brands fa-whatsapp"></i> Enviar Confirmación por WhatsApp
+            </button>
         </form>
-        <div class="footer-note">Hecho con amor para Andrés & Kimberly.</div>
+
+        <div class="footer-note">Hecho con ❤ para Andrés & Kimberly.</div>
     </div>
 </div>
 
@@ -95,16 +295,50 @@
         const cont = document.getElementById('contenedor-menus');
         cont.innerHTML = '';
         for (let i = 1; i <= n; i++) {
-            cont.innerHTML += `<div>Persona ${i}: <b>Menú Vegetariano 🌿</b></div><input type="hidden" class="menu-select" value="Vegetariano">`;
+            cont.innerHTML += `
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; color: #4a4a4a; display:block; margin-bottom:4px;">Menú para Persona ${i}:</label>
+                    <select class="menu-persona-select" data-persona="${i}">
+                        <option value="Carne 🥩">Menú de Carne 🥩</option>
+                        <option value="Pescado 🐟">Menú de Pescado 🐟</option>
+                        <option value="Vegetariano/Vegano 🌿">Menú Vegetariano / Vegano 🌿</option>
+                        <option value="Infantil 🧒">Menú Infantil 🧒</option>
+                    </select>
+                </div>`;
         }
     }
-    generarCamposMenu(2);
+    generarCamposMenu(2); // Inicia con 2 personas por defecto
 
     document.getElementById('rsvp-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        let msg = `RSVP Boda: ${document.getElementById('name').value}\nAsistencia: ${document.querySelector('input[name="attendance"]:checked').value}\n`;
+        const name = document.getElementById('name').value;
+        const attendance = document.querySelector('input[name="attendance"]:checked').value;
+        
+        let message = `💍 *RSVP BODA: Andrés & Kimberly* 💍\n\n`;
+        message += `👤 *Nombre:* ${name}\n`;
+        message += `💌 *Asistencia:* ${attendance}\n`;
+
+        if (attendance === "Sí, asistiré") {
+            const guests = document.getElementById('guests').value;
+            const bus = document.getElementById('bus').value;
+            const allergies = document.getElementById('allergies').value || "Ninguna";
+
+            message += `👥 *Nº de Invitados:* ${guests}\n\n`;
+            message += `🍽️ *Elección de Menús:*\n`;
+            
+            document.querySelectorAll('.menu-persona-select').forEach(select => {
+                message += ` • Persona ${select.getAttribute('data-persona')}: ${select.value}\n`;
+            });
+            
+            message += `\n⚠️ *Alergias/Notas:* ${allergies}\n`;
+            message += `🚌 *Autobús:* ${bus}\n`;
+        } else {
+            message += `😔 Lamentablemente no podré acompañaros, ¡pero os deseo lo mejor! ✨`;
+        }
+
+        // ⚠️ PEGA AQUÍ TU LINK DE INVITACIÓN DEL GRUPO DE WHATSAPP:
         const linkGrupo = "https://chat.whatsapp.com/EbGWIWT6Wew8g1Ek63fYXj?s=cl&p=a&ilr=4";
-        window.open(`${linkGrupo}?text=${encodeURIComponent(msg)}`, '_blank');
+        window.open(`${linkGrupo}?text=${encodeURIComponent(message)}`, '_blank');
     });
 </script>
 </body>

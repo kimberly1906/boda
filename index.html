@@ -198,7 +198,6 @@
             color: #4a4a4a;
         }
 
-        /* Bloque condicional animado para las plazas */
         .bus-conditional {
             max-height: 500px;
             opacity: 1;
@@ -230,6 +229,7 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 12px rgba(11, 90, 117, 0.2);
+            margin-top: 10px;
         }
 
         .btn-submit:hover {
@@ -331,7 +331,7 @@
                         <option value="Solo Vuelta (05:15)">🌙 Solo autobús de regreso (05:15h)</option>
                     </select>
                     
-                    <!-- PREGUNTA DE CUÁNTAS PERSONAS POR BUS -->
+                    <!-- PREGUNTA DINÁMICA DE PERSONAS POR BUS -->
                     <div id="bus-plazas-container" class="bus-conditional hidden">
                         <label for="bus-seats" style="margin-top: 10px; font-size: 0.85rem; color: #4a4a4a;">
                             <i class="fa-solid fa-ticket"></i> ¿Cuántas plazas necesitáis en el autobús?
@@ -347,17 +347,8 @@
                 </div>
             </div>
 
-            <!-- Selector de destino de WhatsApp -->
-            <div class="form-group">
-                <label for="contact-select"><i class="fa-solid fa-paper-plane"></i> ¿A quién envías la confirmación?</label>
-                <select id="contact-select">
-                    <option value="kimberly">A Kimberly 👩‍🦰</option>
-                    <option value="andres">A Andrés 👨</option>
-                </select>
-            </div>
-
             <button type="submit" class="btn-submit">
-                <i class="fa-brands fa-whatsapp"></i> Enviar Confirmación por WhatsApp
+                <i class="fa-brands fa-whatsapp"></i> Enviar Confirmación Directa
             </button>
         </form>
 
@@ -368,10 +359,6 @@
 </div>
 
 <script>
-    // ⚠️ CONFIGURA AQUÍ VUESTROS TELÉFONOS REALES (Pon el código de país delante, ej: 34 para España)
-    const TEL_KIMBERLY = "34600000000"; // <-- Reemplaza por el móvil de Kimberly
-    const TEL_ANDRES = "34600000000"; // <-- Reemplaza por el móvil de Andrés
-
     const optYes = document.getElementById('opt-yes');
     const optNo = document.getElementById('opt-no');
 
@@ -388,7 +375,6 @@
         }
     }
 
-    // Muestra u oculta de verdad la opción de plazas por bus
     function evaluarPreguntaBus(opcionSeleccionada) {
         const contenedorPlazas = document.getElementById('bus-plazas-container');
         if (opcionSeleccionada === "No necesito autobús") {
@@ -418,7 +404,7 @@
         }
     }
 
-    generarCamposMenu(2); // Empezar con 2 personas por defecto
+    generarCamposMenu(2); // Iniciar con 2 personas por defecto
 
     document.getElementById('rsvp-form').addEventListener('submit', function(e) {
         e.preventDefault();
@@ -458,10 +444,11 @@
             message += `😔 Lamentablemente no podré acompañaros, ¡pero os deseo el mejor de los días! ✨`;
         }
 
-        const destino = document.getElementById('contact-select').value;
-        const telefonoDestino = (destino === "kimberly") ? TEL_KIMBERLY : TEL_ANDRES;
+        // ⚠️ PEGA AQUÍ TU ENLACE DE ENLACE DE INVITACIÓN DEL GRUPO DE WHATSAPP ENTRE LAS COMILLAS
+        const enlaceGrupo = "https://chat.whatsapp.com/EbGWIWT6Wew8g1Ek63fYXj?s=cl&p=a&ilr=4";
 
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${telefonoDestino}&text=${encodeURIComponent(message)}`;
+        // Envía el texto directamente abriendo vuestro chat grupal
+        const whatsappUrl = `${enlaceGrupo}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     });
 </script>
